@@ -1,6 +1,3 @@
-import en_core_web_sm
-import pandas as pd
-import spacy
 from flask import Flask, render_template, request, url_for, redirect, session, flash, send_from_directory
 from flask_mysqldb import MySQL
 from datetime import timedelta
@@ -10,7 +7,9 @@ from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import SubmitField
 import os
 import tensorflow as tf
-
+import numpy as np
+import PIL
+from PIL import Image
 
 
 app = Flask(__name__)
@@ -32,32 +31,13 @@ configure_uploads(app, photos)
 res = []
 
 
-class UploadForm(FlaskForm):
-    photo = FileField(
-        validators=[
-            FileAllowed(photos, "Only Images Are Allowed"),
-            FileRequired("Field should not be empty")
-        ]
-    )
-    submit = SubmitField("Upload")
-
 @app.route('/', methods=["GET", "POST"])
 def home():
-    if "loggedin" in session:
-        form = UploadForm()
-        result = ""
-        if form.validate_on_submit():
-            print("working")
-            filename = photos.save(form.photo.data)
-            result = pre_image('uploads/'+filename, loaded_model)
-            print(result)
-
-            file_url = url_for('get_file', filename=filename)
-        else:
-            file_url = None
-            print("not working")
-        return render_template("loggedin.html", username=session["username"], form=form, file_url=file_url, result=result)
-
-    else:
-        return render_template("index.html")
+    # if "loggedin" in session:
+    #     return render_template(".html")
+    # else:
     return render_template("index.html")
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
