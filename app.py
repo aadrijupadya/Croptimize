@@ -56,7 +56,7 @@ filename4 = 'crop_prediction.sav'
 crop_model = pickle.load(open(filename4, 'rb'))
 weather_model = pickle.load(open(filename1, 'rb'))
 county_dict2 = pickle.load(open(filename2, 'rb'))
-# loaded_model = pickle.load(open(filename3, 'rb'))
+loaded_model = pickle.load(open(filename3, 'rb'))
 county_dict = pickle.load(open('crop_county.sav', 'rb'))
 crop_items = pickle.load(open('crop_items.sav', 'rb'))
 county_map_crop = {v: k for k, v in county_dict.items()}
@@ -104,21 +104,21 @@ def get_crop_predictions(county, item):
 # get_crop_predictions(
 #     'NASH', 'POTATOES, IRRIGATED - YIELD, MEASURED IN CWT / ACRE')
 
-# def get_predictions(path):
-#     img = tf.keras.utils.load_img(
-#         path,
-#         grayscale=False,
-#         color_mode="rgb",
-#         target_size=(250, 250),
-#         interpolation="nearest"
-#     )
-#     input_arr = tf.keras.preprocessing.image.img_to_array(img)
-#     input_arr = np.array([input_arr])
+def get_predictions(path):
+    img = tf.keras.utils.load_img(
+        path,
+        grayscale=False,
+        color_mode="rgb",
+        target_size=(250, 250),
+        interpolation="nearest"
+    )
+    input_arr = tf.keras.preprocessing.image.img_to_array(img)
+    input_arr = np.array([input_arr])
 
-#     predictions = loaded_model.predict(input_arr)
-#     predictions_list = list(predictions[0])
-#     prediction = predictions_list.index(max(predictions_list))
-#     return prediction
+    predictions = loaded_model.predict(input_arr)
+    predictions_list = list(predictions[0])
+    prediction = predictions_list.index(max(predictions_list))
+    return prediction
 
 #
 
@@ -414,7 +414,7 @@ def home():
             filename = photos.save(form.photo.data)
 
             file_url = url_for('get_file', filename=filename)
-            result = "Crop seems to be diseased! Check it immediately!: Tomato Yellow Curl Virus"
+            result = get_predictions(file_url)
 
         else:
             file_url = None
