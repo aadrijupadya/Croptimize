@@ -14,29 +14,20 @@
 
         <!-- Header -->
         <header id="header">
-            <h1 id="logo"><a href="index.html">Landed</a></h1>
+            <h1 id="logo"><a href="about.html">Croptimize</a></h1>
             <nav id="nav">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="/about">Home</a></li>
                     <li>
-                        <a href="#">Layouts</a>
+                        <a href="#">Features</a>
                         <ul>
-                            <li><a href="left-sidebar.html">Left Sidebar</a></li>
-                            <li><a href="right-sidebar.html">Right Sidebar</a></li>
-                            <li><a href="no-sidebar.html">No Sidebar</a></li>
-                            <li>
-                                <a href="#">Submenu</a>
-                                <ul>
-                                    <li><a href="#">Option 1</a></li>
-                                    <li><a href="#">Option 2</a></li>
-                                    <li><a href="#">Option 3</a></li>
-                                    <li><a href="#">Option 4</a></li>
-                                </ul>
-                            </li>
+                            <!-- <li><a href="/plant_cv">Plant Disease Detection</a></li> -->
+                            <li><a href="/weathpred">Weather prediction models</a></li>
+                            <li><a href="/firewatch">Firewatch API</a></li>
+                            <li><a href="/croppred">Crop prediction models</a></li>
                         </ul>
                     </li>
-                    <li><a href="elements.html">Elements</a></li>
-                    <li><a href="#" class="button primary">Sign Up</a></li>
+                    <li><a href="/register" class="button primary">Sign Up</a></li>
                 </ul>
             </nav>
         </header>
@@ -72,7 +63,7 @@
                         </div>
                         <div class="col-4 col-12-medium">
                             <p>
-                                <img src="{{ url_for('static', filename='css/images/yield.png') }}" width="200" height="200" alt="" />
+                                <img src="{{ url_for('static', filename='css/images/yield.png') }}" width="350" height="250" alt="" />
                             </p>
                         </div>
                     </div>
@@ -109,13 +100,14 @@
                     <div class="row gtr-uniform">
                         <section class="col-4 col-6-medium col-12-xsmall">
                             <span class="icon solid alt major fa-seedling"></span>
-                            <h3>Ensemble ML models for crop production</h3>
-                            <p>We utilize regression models that were trained on historical USDA data to provide insight about crop production, given a specific location or crop</p>
+                            <h3>Convolutional Neural Network for plant disease detection</h3>
+                            <p>Farmers can upload images of their crops (specifically leaves) and receive reports on whether it is healthy or not.</p>
                         </section>
                         <section class="col-4 col-6-medium col-12-xsmall">
                             <span class="icon solid alt major fa-cloud"></span>
-                            <h3>Ensemble ML models for weather prediction</h3>
-                            <p>Using a regression model trained on historical NOAA weather data, we try to provide monthly predictions for weather based on location, and ideal crops to grow based on this weather.</p>
+                            <h3>Ensemble ML models for weather and crop output prediction</h3>
+                            <p>Using a regression model trained on historical NOAA weather data, we try to provide monthly predictions for weather based on location, and ideal crops to grow based on this weather. We also provide a quantified estimate for
+                                crop yield.</p>
                         </section>
                         <section class="col-4 col-6-medium col-12-xsmall">
                             <span class="icon solid alt major fa-fire"></span>
