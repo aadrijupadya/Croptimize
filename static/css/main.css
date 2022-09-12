@@ -3270,19 +3270,15 @@ body.landing #header {
 
 #banner {
     background-attachment: fixed;
-    <<<<<<< HEAD background-image: url("images/banner.jpg");
+    background-image: url("images/banner.jpg");
     background-size: cover;
     opacity: 0.8;
     /* box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.25); */
-<<<<<<< HEAD
-=======
-    =======background-color: #272833;
     background-image: url("../../images/banner.jpg");
     background-position: center center;
     background-size: cover;
     box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.25);
-    >>>>>>>13ca039ed33b1d8c11bce8ff3953b2de964bf8bf min-height: 100vh;
->>>>>>> f52e23bbcfc3054da106c05ca583ab547effd8b3
+    min-height: 100vh;
     position: relative;
     text-align: center;
     z-index: 21;
@@ -3297,9 +3293,9 @@ body.landing #header {
 }
 
 #banner:after {
-    <<<<<<< HEAD background-image: url("images/banner.jpg");
+    background-image: url("images/banner.jpg");
     background-size: cover;
-    =======background-image: -moz-linear-gradient(top, rgba(23, 24, 32, 0.95), rgba(23, 24, 32, 0.95)), url("images/overlay.png");
+    background-image: -moz-linear-gradient(top, rgba(23, 24, 32, 0.95), rgba(23, 24, 32, 0.95)), url("images/overlay.png");
     ;
     background-image: -webkit-linear-gradient(top, rgba(23, 24, 32, 0.95), rgba(23, 24, 32, 0.95)), url("images/overlay.png");
     ;
@@ -3307,7 +3303,7 @@ body.landing #header {
     ;
     background-image: linear-gradient(top, rgba(23, 24, 32, 0.95), rgba(23, 24, 32, 0.95)), url("images/overlay.png");
     ;
-    >>>>>>>13ca039ed33b1d8c11bce8ff3953b2de964bf8bf content: '';
+    content: '';
     display: block;
     height: 100%;
     left: 0;

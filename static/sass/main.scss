@@ -14,13 +14,18 @@
 */
 
 // Breakpoints.
-@include breakpoints(( xlarge : ( 1281px, 1680px),
-large : ( 981px, 1280px),
-medium : ( 737px, 980px),
-small : ( 481px, 736px),
-xsmall : ( null, 480px),
+@include breakpoints(( xlarge: ( 1281px, 1680px),
+large: ( 981px, 1280px),
+medium: ( 737px, 980px),
+small: ( 481px, 736px),
+xsmall: ( null, 480px),
 ));
-// Mixins.
+@include breakpoints(( xlarge: ( 1281px, 1680px),
+large: ( 981px, 1280px),
+medium: ( 737px, 980px),
+small: ( 481px, 736px),
+xsmall: ( null, 480px),
+));
 @mixin line-icon($bg: _palette(bg),
 $fg: _palette(fg-bold)) {
     @include icon;
@@ -1583,7 +1588,80 @@ body.landing {
 
 /* Banner */
 
-<<<<<<< HEAD #banner {
+#banner {
+    background-attachment: fixed;
+    background-color: _palette(accent2);
+    background-image: url('../../images/banner.jpg');
+    background-position: center center;
+    background-size: cover;
+    box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.25);
+    min-height: 100vh;
+    position: relative;
+    text-align: center;
+    z-index: (_misc(max-spotlight) + 1);
+    &:before {
+        content: '';
+        display: inline-block;
+        height: 100vh;
+        vertical-align: middle;
+        width: 1%;
+    }
+    &:after {
+        @include vendor('background-image',
+        ('linear-gradient(top, #{_palette(bg-transparent)}, #{_palette(bg-transparent)})',
+        'url("images/overlay.png");'));
+        content: '';
+        display: block;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+    .content {
+        display: inline-block;
+        margin-right: 1%;
+        max-width: 95%;
+        padding: $size-wrapper-pad-tb;
+        position: relative;
+        text-align: right;
+        vertical-align: middle;
+        z-index: 1;
+        header {
+            display: inline-block;
+            vertical-align: middle;
+            h2 {
+                font-size: 2.5em;
+                margin: 0;
+            }
+            p {
+                margin: (_size(element-margin) * 0.25) 0 0 0;
+                top: 0;
+            }
+        }
+        .image {
+            border-radius: 100%;
+            display: inline-block;
+            height: 18em;
+            margin-left: 3em;
+            vertical-align: middle;
+            width: 18em;
+            img {
+                border-radius: 100%;
+                display: block;
+                width: 100%;
+            }
+        }
+    }
+}
+
+body.is-touch {
+    #banner {
+        background-attachment: scroll;
+    }
+}
+
+#banner {
     background-attachment: fixed;
     background-color: _palette(accent2);
     background-image: url('../../images/banner.jpg');
@@ -1729,7 +1807,7 @@ body.is-touch {
     }
 }
 
->>>>>>>f52e23bbcfc3054da106c05ca583ab547effd8b3
+
 /* Footer */
 
 #footer {
