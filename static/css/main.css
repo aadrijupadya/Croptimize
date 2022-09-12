@@ -2654,6 +2654,9 @@ input[type="button"]:active,
 .button:active {
     <<<<<<< HEAD box-shadow: inset 0 0 0 1px #00f13ca1;
     color: #00f13ca1 !important;
+    =======box-shadow: inset 0 0 0 1px #e44c65;
+    color: #e44c65 !important;
+    >>>>>>>13ca039ed33b1d8c11bce8ff3953b2de964bf8bf
 }
 
 input[type="submit"]:active,
@@ -3267,10 +3270,19 @@ body.landing #header {
 
 #banner {
     background-attachment: fixed;
-    background-image: url("images/banner.jpg");
+    <<<<<<< HEAD background-image: url("images/banner.jpg");
     background-size: cover;
     opacity: 0.8;
     /* box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.25); */
+<<<<<<< HEAD
+=======
+    =======background-color: #272833;
+    background-image: url("../../images/banner.jpg");
+    background-position: center center;
+    background-size: cover;
+    box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.25);
+    >>>>>>>13ca039ed33b1d8c11bce8ff3953b2de964bf8bf min-height: 100vh;
+>>>>>>> f52e23bbcfc3054da106c05ca583ab547effd8b3
     position: relative;
     text-align: center;
     z-index: 21;
