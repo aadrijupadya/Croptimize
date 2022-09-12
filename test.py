@@ -2,8 +2,10 @@ from bs4 import BeautifulSoup
 import requests
 import csv
 from io import StringIO
+from geopy.geocoders import Nominatim  
 
 def firewatch():
+    geolocator = Nominatim(user_agent="geoapiExcercises")
     info_list = []
     url = "https://www.fire.ca.gov/incidents/2022/"
     r = requests.get(url)
@@ -29,18 +31,33 @@ def firewatch():
                     # print(out[0] + "||" + out[1] + ".")
                     lat = out[0].split(':')[-1]
                     lon = out[1].split(":")[-1]
-                    print(lat + "||" + lon )
+                    # print(lat + "||" + lon )
+                    location = geolocator.reverse(lat+","+lon)
+                    address = location.raw['address']
+                    city = address.get('city', '')
+                    state = address.get('state', '')
+                    country = address.get('country', '')
+                    code = address.get('country_code')
+                    zipcode = address.get('postcode')
+                    print('City : ', city, 'State : ', state, 'Country : ', country, 'Zip Code : ', zipcode)
                 else:
                     # print(out[1]+"| |" + out[2] + "..")
                     lat = out[1].split(':')[-1]
                     lon = out[2].split(":")[-1]
-                    print(lat + "||" + lon )
-
-                if "PercentContainedDisplay" in out[3]:
-                    print(out[2] + "||" + out[3] + ".")
-                else:
-                    print(out[3] + "||" + out[4] + "..")
-                    print("-----------------------------------------------------------")
+                    # print(lat + "||" + lon )
+                    location = geolocator.reverse(lat+","+lon)
+                    address = location.raw['address']
+                    city = address.get('city', '')
+                    state = address.get('state', '')
+                    country = address.get('country', '')
+                    code = address.get('country_code')
+                    zipcode = address.get('postcode')
+                    print('City : ', city, 'State : ', state, 'Country : ', country, 'Zip Code : ', zipcode)
+                # if "PercentContainedDisplay" in out[3]:
+                #     print(out[2] + "||" + out[3] + ".")
+                # else:
+                #     print(out[3] + "||" + out[4] + "..")
+                #     print("-----------------------------------------------------------")
             except:
                 print("latitude not in index")
 # print(info_list[1619])
