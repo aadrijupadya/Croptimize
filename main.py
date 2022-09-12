@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect, session
+from flask import Flask, render_template, request, url_for, redirect, session, send_from_directory
 from datetime import timedelta
 from bs4 import BeautifulSoup
 import requests
@@ -11,10 +11,21 @@ import urllib.parse
 from email.message import EmailMessage
 import ssl
 import smtplib
+import en_core_web_sm
+from flask_uploads import UploadSet, IMAGES, configure_uploads
+from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileRequired, FileAllowed
+from wtforms import SubmitField
+import os
 
 
 app = Flask(__name__)
 app.secret_key = "firewatch"
+
+app.config['UPLOADED_PHOTOS_DEST'] = 'uploads'
+photos = UploadSet("photos", IMAGES)
+configure_uploads(app, photos)
+res = []
 
 app.config["MYSQL_HOST"] = 'localhost'
 app.config["MYSQL_USER"] = "root"
@@ -276,12 +287,39 @@ def firewatch(loc_lat, loc_lon):
             except Exception as e:
                 print(e)
 
+class UploadForm(FlaskForm):
+    photo = FileField(
+        validators=[
+            FileAllowed(photos, "Only Images Are Allowed"),
+            FileRequired("Field should not be empty")
+        ]
+    )
+    submit = SubmitField("Upload")
+
 
 @app.route("/", methods=["GET", "POST"])
 def home():
-    if "loggedin" in session:
-        return render_template("inhome.html", username = session["username"])
-    return render_template("index.html")
+        if "loggedin" in session:
+            cursor = mysql.connection.cursor()
+            cursor.execute("DELETE FROM firewatch;")
+            form = UploadForm()
+            result = ""
+            if form.validate_on_submit():
+                print("working")
+                filename = photos.save(form.photo.data)
+
+                file_url = url_for('get_file', filename=filename)
+            else:
+                file_url = None
+                print("not working")
+            return render_template("loggedin.html", username=session["username"], form=form, file_url=file_url, result=result)
+
+        else:
+            return render_template("index.html")
+        return render_template("index.html")
+
+
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -337,6 +375,11 @@ def login():
             print("Retry")
     return render_template("login.html", msg=msg)
 
+
+@app.route("/uploads/<filename>")
+def get_file(filename):
+    return send_from_directory("uploads", filename)
+
 @app.route('/firewatch', methods = ["GET", "POST"])
 def weath_watch():
     if request.method == "POST":
@@ -350,6 +393,26 @@ def weath_watch():
         firewatch(int_lata, int_lona)
         return redirect(url_for('view'))
     return render_template("firewatch.html")
+
+@app.route("/croppred", methods = ["GET", "POST"])
+def croppred():
+    if "loggedin" in session:
+        if request.method == "POST":
+            county = request.form["county"]
+            item = request.form["item"]
+        return render_template("croppred.html")
+    else:
+        return render_template("index.html")
+
+@app.route("/weathpred", methods = ["GET", "POST"])
+def weathpred():
+    if "loggedin" in session:
+        if request.method == "POST":
+            county = request.form["county"]
+            month = request.form["month"]
+        return render_template("weathpred.html")
+    else:
+        return render_template("index.html")
 
 @app.route('/view', methods = ["GET", "POST"])
 def view():
